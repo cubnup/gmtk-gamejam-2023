@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var spr = get_node('sprite')
 @onready var coll = get_node('coll')
+@onready var larva = preload("res://scenes/larva.tscn")
 
 var speed = 300.0
 var speedmin = 150.0
@@ -10,8 +11,8 @@ var hopvel = 150.0
 var hopmin = 350.0
 var hopmax = 550.0
 var jumpvel = 150.0
-var jumpmin = 300.0
-var jumpmax = 450.0
+var jumpmin = 400.0
+var jumpmax = 550.0
 var jumpstate = 1
 var jumpnow = 0.0
 var jumpclock = 0
@@ -24,14 +25,18 @@ var normalg = 29.1
 var jumpg = 8.1
 var fallg = 49.2
 var animclock = 0
+var dir = -1
 
+
+var coyote = 30
 
 func _physics_process(delta):
-	
+	if Input.is_action_just_pressed("reload"):get_tree().reload_current_scene()
 	animclock = (animclock+1)%12
 	if not is_on_floor(): velocity.y+=gravity
 	
 	if is_on_floor():
+		coyote = 30
 		jumpstate = 1
 		if abs(velocity.x)>60 or (abs(velocity.x)>0 and sign(velocity.x)==sign(Input.get_axis("l", "r"))): spr.frame = 3 if (animclock>5) else 4
 		else: spr.frame = 0
@@ -43,6 +48,11 @@ func _physics_process(delta):
 			spr.modulate = Color(1, 0, 0, 1) if animclock>5 else Color(1, 1, 1, 1)
 		else:
 			spr.modulate = Color(1, 1, 1, 1)
+	else:
+		if coyote>0:coyote-=1
+		else:jumpstate=0
+			
+			
 	if !Input.is_action_pressed("d") or !is_on_floor():spr.modulate = Color(1, 1, 1, 1)
 		
 	if crouchclock>0:
@@ -78,12 +88,19 @@ func _physics_process(delta):
 		var rng = RandomNumberGenerator.new()
 		
 		speed = lerp(speed,speedmin,0.05)
+		if velocity.y>0: spr.frame=6
 		if is_on_floor():
-			if rng.randi_range(1,2)==1:throw()
+			if rng.randi_range(1,2)==1:
+				throw()
+				spr.frame =7
+			else:
+				spr.frame=6
 			velocity.y = -max(hopvel*abs(velocity.x/speed),200)
 	else:
 		speed = lerp(speed,speedmax,0.1)
-		if abs(velocity.x)>0: spr.scale.x=-sign(velocity.x)
+		if abs(velocity.x)>0: 
+			spr.scale.x=-sign(velocity.x)
+			dir = sign(velocity.x)
 		
 		
 	jumpvel = lerp(jumpmin,jumpmax,abs(velocity.x)/speed)
@@ -103,3 +120,7 @@ func _physics_process(delta):
 
 func throw():
 	print('Thrown!')
+	var l = larva.instantiate()
+	l.dir=dir
+	l.global_position=global_position+Vector2.UP*20
+	get_tree().get_root().add_child(l)

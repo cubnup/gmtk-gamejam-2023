@@ -1,12 +1,47 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc7t3h0hodida"]
+[gd_scene load_steps=14 format=3 uid="uid://bwcb28yxsf5pp"]
 
-[ext_resource type="Script" path="res://bro.gd" id="1_137gh"]
-[ext_resource type="SpriteFrames" uid="uid://c8tftr6gtk1ny" path="res://bro.tres" id="1_hmptq"]
-[ext_resource type="Script" path="res://hammer.gd" id="1_kbqn6"]
-[ext_resource type="Texture2D" uid="uid://cb0s5b7sgllxh" path="res://SNES - Super Mario World - Yoshis Island 1.png" id="3_optfn"]
+[ext_resource type="Script" path="res://scripts/bro.gd" id="3_kc7m1"]
+[ext_resource type="Texture2D" uid="uid://bnjqq2thmumlo" path="res://sprites/bro/bro1.png" id="4_ysi65"]
+[ext_resource type="Texture2D" uid="uid://cb0s5b7sgllxh" path="res://misc/SNES - Super Mario World - Yoshis Island 1.png" id="5_2yieh"]
+[ext_resource type="Texture2D" uid="uid://78wk18nfqgl6" path="res://sprites/bro/bro2.png" id="5_7tjuu"]
+[ext_resource type="Texture2D" uid="uid://cbqo7hq366emw" path="res://sprites/bro/bro3.png" id="6_kwutb"]
+[ext_resource type="Texture2D" uid="uid://dod738ljl412x" path="res://sprites/bro/bro4.png" id="7_nqqw4"]
+[ext_resource type="Texture2D" uid="uid://cnujbkc80kdf3" path="res://sprites/bro/bro5.png" id="8_soux4"]
+[ext_resource type="Texture2D" uid="uid://dkhv87m32jq4j" path="res://sprites/bro/bro6.png" id="9_dk1td"]
+[ext_resource type="Texture2D" uid="uid://cd3q251rtl7s7" path="res://sprites/bro/bro7.png" id="10_w26vd"]
+[ext_resource type="Texture2D" uid="uid://ch8phc2aa4pt6" path="res://sprites/bro/bro8.png" id="11_3883q"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ivog1"]
-radius = 5.0
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgehi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ysi65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7tjuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kwutb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nqqw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_soux4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dk1td")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w26vd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3883q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rl8u"]
 height = 26.0
@@ -15,23 +50,16 @@ height = 26.0
 
 [node name="Node2D" type="Node2D"]
 
-[node name="hammer" type="CharacterBody2D" parent="."]
-position = Vector2(2.08165e-12, 2.08165e-12)
-script = ExtResource("1_kbqn6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hammer"]
-shape = SubResource("CircleShape2D_ivog1")
-
 [node name="cam" type="Camera2D" parent="."]
-offset = Vector2(2.08165e-12, 60)
+offset = Vector2(2.08165e-12, 90)
 zoom = Vector2(2.5, 2.5)
 
 [node name="bro" type="CharacterBody2D" parent="."]
-script = ExtResource("1_137gh")
+script = ExtResource("3_kc7m1")
 
 [node name="sprite" type="AnimatedSprite2D" parent="bro"]
 position = Vector2(2.08165e-12, 2)
-sprite_frames = ExtResource("1_hmptq")
+sprite_frames = SubResource("SpriteFrames_sgehi")
 
 [node name="coll" type="CollisionShape2D" parent="bro"]
 position = Vector2(0, 3)
@@ -93,4 +121,4 @@ polygon = PackedVector2Array(1343, 118.5, 1347, 121.5, 1347, 135, 1345.5, 135, 1
 
 [node name="stage" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(6, 6)
-texture = ExtResource("3_optfn")
+texture = ExtResource("5_2yieh")

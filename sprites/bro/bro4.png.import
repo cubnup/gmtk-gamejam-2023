@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb0s5b7sgllxh"
-path="res://.godot/imported/SNES - Super Mario World - Yoshis Island 1.png-cbfedcb2a9e2c50d3f629aebf59139d5.ctex"
+uid="uid://dod738ljl412x"
+path="res://.godot/imported/bro4.png-e3dcdb04349858d2995914cd2b92519c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SNES - Super Mario World - Yoshis Island 1.png"
-dest_files=["res://.godot/imported/SNES - Super Mario World - Yoshis Island 1.png-cbfedcb2a9e2c50d3f629aebf59139d5.ctex"]
+source_file="res://sprites/bro/bro4.png"
+dest_files=["res://.godot/imported/bro4.png-e3dcdb04349858d2995914cd2b92519c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dod738ljl412x"
-path="res://.godot/imported/bro4.png-91c19016f5bc7b20769675be0b818ce1.ctex"
+uid="uid://bnjqq2thmumlo"
+path="res://.godot/imported/bro1.png-0c9d444e7d2938d379be364fec5b1d87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bro/bro4.png"
-dest_files=["res://.godot/imported/bro4.png-91c19016f5bc7b20769675be0b818ce1.ctex"]
+source_file="res://sprites/bro/bro1.png"
+dest_files=["res://.godot/imported/bro1.png-0c9d444e7d2938d379be364fec5b1d87.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

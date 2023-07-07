@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/hammer.gd" id="1_xlqv1"]
+[ext_resource type="Texture2D" uid="uid://dubbeo1vjtj5q" path="res://sprites/larva.png" id="2_x40o8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ivog1"]
+radius = 5.0
+
+[node name="larva" type="CharacterBody2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_xlqv1")
+
+[node name="coll" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ivog1")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_x40o8")

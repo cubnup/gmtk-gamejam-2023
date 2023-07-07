@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbqo7hq366emw"
-path="res://.godot/imported/bro3.png-75139d2b2d49c4483cc465fa5c044137.ctex"
+uid="uid://dd267v5flnlpo"
+path="res://.godot/imported/icon.svg-2be59eb5925b98a41040443b64335822.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bro/bro3.png"
-dest_files=["res://.godot/imported/bro3.png-75139d2b2d49c4483cc465fa5c044137.ctex"]
+source_file="res://misc/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-2be59eb5925b98a41040443b64335822.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
