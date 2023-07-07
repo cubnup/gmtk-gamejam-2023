@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwcb28yxsf5pp"]
+[gd_scene load_steps=24 format=3 uid="uid://bp3i0rps4e70e"]
 
+[ext_resource type="Script" path="res://scenes/cam.gd" id="1_vxrax"]
 [ext_resource type="Script" path="res://scripts/bro.gd" id="3_kc7m1"]
 [ext_resource type="Texture2D" uid="uid://bnjqq2thmumlo" path="res://sprites/bro/bro1.png" id="4_ysi65"]
 [ext_resource type="Texture2D" uid="uid://cb0s5b7sgllxh" path="res://misc/SNES - Super Mario World - Yoshis Island 1.png" id="5_2yieh"]
@@ -9,7 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://cnujbkc80kdf3" path="res://sprites/bro/bro5.png" id="8_soux4"]
 [ext_resource type="Texture2D" uid="uid://dkhv87m32jq4j" path="res://sprites/bro/bro6.png" id="9_dk1td"]
 [ext_resource type="Texture2D" uid="uid://cd3q251rtl7s7" path="res://sprites/bro/bro7.png" id="10_w26vd"]
+[ext_resource type="Script" path="res://manto.gd" id="11_25tjn"]
 [ext_resource type="Texture2D" uid="uid://ch8phc2aa4pt6" path="res://sprites/bro/bro8.png" id="11_3883q"]
+[ext_resource type="SpriteFrames" uid="uid://b8u0tolge58gm" path="res://resources/manto.tres" id="12_txiqi"]
+[ext_resource type="Script" path="res://scenes/flower.gd" id="13_2grud"]
+[ext_resource type="Texture2D" uid="uid://fcye6qvtewyl" path="res://sprites/flower.png" id="13_owxi0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sgehi"]
 animations = [{
@@ -48,13 +53,35 @@ height = 26.0
 
 [sub_resource type="TileSet" id="TileSet_wud3t"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fp07u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pk8yf"]
+size = Vector2(16, 11.456)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iyxqi"]
+radius = 11.1803
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jep35"]
+size = Vector2(20, 101.5)
+
+[sub_resource type="Gradient" id="Gradient_60clc"]
+colors = PackedColorArray(0.984314, 0.592157, 0.0235294, 1, 0.717647, 0.0745098, 0.407843, 0)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="cam" type="Camera2D" parent="."]
 offset = Vector2(2.08165e-12, 90)
 zoom = Vector2(2.5, 2.5)
+script = ExtResource("1_vxrax")
+
+[node name="lbar" type="Label" parent="cam"]
+offset_left = -222.0
+offset_top = -33.0
+offset_right = -182.0
+offset_bottom = -10.0
 
 [node name="bro" type="CharacterBody2D" parent="."]
+z_index = 99
 script = ExtResource("3_kc7m1")
 
 [node name="sprite" type="AnimatedSprite2D" parent="bro"]
@@ -122,3 +149,136 @@ polygon = PackedVector2Array(1343, 118.5, 1347, 121.5, 1347, 135, 1345.5, 135, 1
 [node name="stage" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(6, 6)
 texture = ExtResource("5_2yieh")
+
+[node name="manto" type="CharacterBody2D" parent="."]
+z_index = 89
+position = Vector2(-901, 3)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("11_25tjn")
+
+[node name="sprite" type="AnimatedSprite2D" parent="manto"]
+position = Vector2(2.08165e-12, 2)
+sprite_frames = ExtResource("12_txiqi")
+
+[node name="coll" type="CollisionShape2D" parent="manto"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_0rl8u")
+
+[node name="rc" type="RayCast2D" parent="manto"]
+position = Vector2(0, 14)
+
+[node name="manto2" type="CharacterBody2D" parent="."]
+z_index = 89
+position = Vector2(-217, -27)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("11_25tjn")
+
+[node name="sprite" type="AnimatedSprite2D" parent="manto2"]
+position = Vector2(2.08165e-12, 2)
+sprite_frames = ExtResource("12_txiqi")
+
+[node name="coll" type="CollisionShape2D" parent="manto2"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_0rl8u")
+
+[node name="rc" type="RayCast2D" parent="manto2"]
+position = Vector2(0, 14)
+
+[node name="manto3" type="CharacterBody2D" parent="."]
+z_index = 89
+position = Vector2(-83, -2)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("11_25tjn")
+
+[node name="sprite" type="AnimatedSprite2D" parent="manto3"]
+position = Vector2(2.08165e-12, 2)
+sprite_frames = ExtResource("12_txiqi")
+
+[node name="coll" type="CollisionShape2D" parent="manto3"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_0rl8u")
+
+[node name="rc" type="RayCast2D" parent="manto3"]
+position = Vector2(0, 14)
+
+[node name="manto4" type="CharacterBody2D" parent="."]
+z_index = 89
+position = Vector2(-176, 33)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("11_25tjn")
+
+[node name="sprite" type="AnimatedSprite2D" parent="manto4"]
+position = Vector2(2.08165e-12, 2)
+sprite_frames = ExtResource("12_txiqi")
+
+[node name="coll" type="CollisionShape2D" parent="manto4"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_0rl8u")
+
+[node name="rc" type="RayCast2D" parent="manto4"]
+position = Vector2(0, 14)
+
+[node name="manto5" type="CharacterBody2D" parent="."]
+z_index = 89
+position = Vector2(-137, -62)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("11_25tjn")
+
+[node name="sprite" type="AnimatedSprite2D" parent="manto5"]
+position = Vector2(2.08165e-12, 2)
+sprite_frames = ExtResource("12_txiqi")
+
+[node name="coll" type="CollisionShape2D" parent="manto5"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_0rl8u")
+
+[node name="rc" type="RayCast2D" parent="manto5"]
+position = Vector2(0, 14)
+
+[node name="flower" type="StaticBody2D" parent="."]
+position = Vector2(200, 41)
+physics_material_override = SubResource("PhysicsMaterial_fp07u")
+script = ExtResource("13_2grud")
+
+[node name="coll" type="CollisionShape2D" parent="flower"]
+position = Vector2(2, 126.728)
+shape = SubResource("RectangleShape2D_pk8yf")
+
+[node name="area" type="Area2D" parent="flower"]
+position = Vector2(0, 122.456)
+
+[node name="coll" type="CollisionShape2D" parent="flower/area"]
+position = Vector2(0, -118.456)
+shape = SubResource("CircleShape2D_iyxqi")
+
+[node name="area2" type="Area2D" parent="flower"]
+position = Vector2(0, 122.456)
+
+[node name="coll" type="CollisionShape2D" parent="flower/area2"]
+position = Vector2(3, -39.706)
+shape = SubResource("RectangleShape2D_jep35")
+
+[node name="Larva" type="Sprite2D" parent="flower"]
+position = Vector2(0, 61)
+scale = Vector2(2, 2)
+texture = ExtResource("13_owxi0")
+
+[node name="larvaline" type="Line2D" parent="flower"]
+z_index = -1
+position = Vector2(2.08165e-12, 2.08165e-12)
+points = PackedVector2Array(100, 2.08165e-12, 0, 0)
+gradient = SubResource("Gradient_60clc")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="spawner" type="StaticBody2D" parent="."]
+
+[connection signal="body_entered" from="flower/area" to="flower" method="_on_area_body_entered"]
+[connection signal="body_entered" from="flower/area2" to="flower" method="_on_area_2_body_entered"]

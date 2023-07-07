@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://b8u0tolge58gm"]
+
+[ext_resource type="Texture2D" uid="uid://2j8yab1ptjrk" path="res://sprites/manto/mant1.png" id="1_5c7ji"]
+[ext_resource type="Texture2D" uid="uid://bhgkwljmp73vn" path="res://sprites/manto/mant2.png" id="2_w6ppn"]
+[ext_resource type="Texture2D" uid="uid://bs1nup6cemi4e" path="res://sprites/manto/mant3.png" id="3_ecs66"]
+[ext_resource type="Texture2D" uid="uid://d2c0e2uejppbm" path="res://sprites/manto/mant4.png" id="4_qpury"]
+[ext_resource type="Texture2D" uid="uid://bqlqefas27bgy" path="res://sprites/manto/mant5.png" id="5_nqb1o"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5c7ji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w6ppn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ecs66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qpury")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nqb1o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
