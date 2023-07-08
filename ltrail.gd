@@ -11,6 +11,7 @@ func _ready():
 
 
 func _physics_process(delta):
+	
 	larvae = global.bro.larvae
 	if len(larvarr)<larvae:
 		for i in range(larvae-len(larvarr)):

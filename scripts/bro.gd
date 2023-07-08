@@ -20,7 +20,7 @@ var jumpmax = 650.0
 var jumpstate = 1
 var jumpnow = 0.0
 var jumpclock = 0
-var jumptime = 10
+var jumptime = 17
 
 var crouchclock=0
 
@@ -42,6 +42,7 @@ var charging = 0
 
 func _ready():
 	global.bro=self
+	throwtype = 1
 
 
 func _physics_process(delta):
@@ -72,6 +73,10 @@ func _physics_process(delta):
 		if coyote>0:coyote-=1
 		else:jumpstate=0
 	
+	if Input.is_action_pressed('d') and is_on_floor():
+		set_collision_mask_value(5,false)
+	else:
+		set_collision_mask_value(5,true)
 
 	if Input.is_action_pressed("d"):
 		if is_on_floor():
@@ -102,7 +107,8 @@ func _physics_process(delta):
 		velocity.y = jumpnow
 		jumpclock=jumptime
 
-
+	if charging>0:
+		spr.modulate = Color(0.7, 0.7, 0.7, 1)
 	match jumpstate:
 		0:
 			gravity = fallg
@@ -125,7 +131,7 @@ func _physics_process(delta):
 		
 		
 		
-	if Input.is_action_just_pressed("shift"):
+	if Input.is_action_pressed("shift"):
 		if crouchclock==0:
 #			var rng = RandomNumberGenerator.new()
 			if is_on_floor():
@@ -153,7 +159,6 @@ func _physics_process(delta):
 	else:
 		if Input.is_action_pressed("d"): velocity.x = lerp(velocity.x,0.0,0.01)
 		else: velocity.x = lerp(velocity.x,0.0,0.05)
-
 
 
 

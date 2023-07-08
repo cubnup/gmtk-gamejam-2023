@@ -14,7 +14,7 @@ var accel = 15
 
 var jumpstate = 0
 var jumpmint = 5
-var jumpmaxt = 80
+var jumpmaxt = 60
 var jumpclock = 0
 
 var gravity = 49.1
@@ -40,6 +40,7 @@ var doclimb = false
 var sprintclock = 0
 
 func _physics_process(delta): 
+	if global_position.x>global.flower.global_position.x+50: dir=-1
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	sprintclock+=rng.randi_range(0,5)
@@ -60,9 +61,10 @@ func _physics_process(delta):
 	
 	
 	rng.randomize()
-	if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.9) or rng.randf_range(0,1)>0.99) and targeti!=2:
+	if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.9) or rng.randf_range(0,1)>0.9):
 		jump()
-	
+	if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.99) or rng.randf_range(0,1)>0.99):
+		doturn()
 
 	if is_on_floor():
 		jumpstate=1
@@ -92,7 +94,6 @@ func _physics_process(delta):
 	if doclimb: 
 		velocity=Vector2.UP*30
 		spr.frame=2 if animclock>5 else 3
-		print('deez')
 
 	move_and_slide()
 
@@ -100,17 +101,18 @@ func _physics_process(delta):
 func jump():
 	jumpstate = 2
 	var rng = RandomNumberGenerator.new()
-	velocity.y=-rng.randf_range(340,630)
+	velocity.y=-rng.randf_range(340,830)
 	jumpclock= rng.randi_range(jumpmint,jumpmaxt)
 	
 func dojump():
 	if is_on_floor():
 		jumpstate = 2
-		velocity.y=-900
+		velocity.y=-1200
 		jumpclock= jumpmaxt
 
 func doturn():
 	dir*=-1
+	print('fuck')
 
 func climb():
 	doclimb=true

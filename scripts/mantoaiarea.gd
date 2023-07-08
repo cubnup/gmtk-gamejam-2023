@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var actinduced: String = 'jump'
+@export var probability: float = 0.5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,12 +13,14 @@ func _process(delta):
 
 
 func _on_body_entered(body):
+	print(body)
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	if rng.randi_range(0,1)==1:match actinduced:
+	match actinduced:
 		'jump':
-			if body.has_method('dojump'):
-				body.dojump()
+			if rng.randf_range(0,1)<=probability:if body.has_method('jump'):
+				body.jump()
+				print('adasd')
 		'turn':
-			if body.has_method('doturn'):
+			if rng.randf_range(0,1)<=probability:if body.has_method('doturn'):
 				body.doturn()

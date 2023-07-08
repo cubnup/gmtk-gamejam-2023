@@ -17,7 +17,7 @@ size = Vector2(18, 11.456)
 radius = 11.1803
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jep35"]
-size = Vector2(16, 101.5)
+size = Vector2(15.686, 82.25)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f638q"]
 animations = [{
@@ -63,7 +63,7 @@ position = Vector2(2, 65.5)
 shape = SubResource("RectangleShape2D_pk8yf")
 
 [node name="area" type="Area2D" parent="."]
-position = Vector2(2.08165e-12, 2.08165e-12)
+position = Vector2(1.5, -16)
 collision_layer = 6
 collision_mask = 6
 

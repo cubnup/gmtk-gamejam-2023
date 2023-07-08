@@ -24,5 +24,6 @@ func _physics_process(delta):
 		for i in get_slide_collision_count():
 			var manto = get_slide_collision(i).get_collider()
 			manto.fuckingdie()
+			queue_free()
 	if global_position.y>5000:queue_free()
 	rotation+=0.1

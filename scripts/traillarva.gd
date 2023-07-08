@@ -54,7 +54,9 @@ func _physics_process(delta):
 			pass
 		1:
 			global_position=global_position.lerp(global.bro.global_position-(global.bro.global_position-global_position).normalized()*followdist,0.2)
+			look_at(global.bro.global_position)
 	
+	spr.frame = global.bro.throwtype
 
 
 func jump():

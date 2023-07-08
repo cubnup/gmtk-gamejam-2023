@@ -10,8 +10,8 @@ height = 26.0
 z_index = 89
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(2, 2)
-collision_layer = 2
-collision_mask = 4
+collision_layer = 258
+collision_mask = 20
 script = ExtResource("1_icb18")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
