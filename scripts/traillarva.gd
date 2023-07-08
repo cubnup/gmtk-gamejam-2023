@@ -47,13 +47,19 @@ func _physics_process(delta):
 		state = 1
 	else:
 		state = 0
-		
+	
+	var rng = RandomNumberGenerator.new()
+	var rngv = Vector2.ZERO
+	rng.randomize()
+	rngv.x = randf_range(-5,5)
+	rng.randomize()
+	rngv.y = randf_range(-5,5)
 	state = 1
 	match state:
 		0:
 			pass
 		1:
-			global_position=global_position.lerp(global.bro.global_position-(global.bro.global_position-global_position).normalized()*followdist,0.2)
+			global_position=global_position.lerp(global.bro.global_position-(global.bro.global_position-global_position+rngv*5).normalized()*followdist,0.1)
 			look_at(global.bro.global_position)
 	
 	spr.frame = global.bro.throwtype

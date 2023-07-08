@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dubbeo1vjtj5q" path="res://sprites/larva.png" id="2_x40o8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivog1"]
-radius = 4.0
+radius = 9.0
 
 [node name="larva" type="CharacterBody2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -17,4 +17,5 @@ script = ExtResource("1_xlqv1")
 shape = SubResource("CircleShape2D_ivog1")
 
 [node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("2_x40o8")

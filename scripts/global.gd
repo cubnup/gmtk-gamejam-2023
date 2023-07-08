@@ -2,4 +2,5 @@ extends Node
 
 var bro
 var flower
-var lbar
+var score = 0
+

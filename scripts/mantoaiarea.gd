@@ -13,14 +13,12 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	print(body)
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	match actinduced:
 		'jump':
 			if rng.randf_range(0,1)<=probability:if body.has_method('jump'):
 				body.jump()
-				print('adasd')
 		'turn':
 			if rng.randf_range(0,1)<=probability:if body.has_method('doturn'):
 				body.doturn()

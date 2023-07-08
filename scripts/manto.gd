@@ -14,7 +14,7 @@ var accel = 15
 
 var jumpstate = 0
 var jumpmint = 5
-var jumpmaxt = 60
+var jumpmaxt = 30
 var jumpclock = 0
 
 var gravity = 49.1
@@ -48,8 +48,10 @@ func _physics_process(delta):
 		sprintclock=0
 		sprinting = !sprinting
 	
+	dir+=0.01*sign(global.flower.global_position.x-global_position.x)
+	dir = clampf(dir,-1,1)
 	
-	spr.scale.x=-dir
+	if dir!=0:spr.scale.x=-sign(dir)
 	animclock = (animclock+1)%12
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -92,7 +94,7 @@ func _physics_process(delta):
 	
 	
 	if doclimb: 
-		velocity=Vector2.UP*30
+		velocity=Vector2.UP*60
 		spr.frame=2 if animclock>5 else 3
 
 	move_and_slide()
@@ -111,11 +113,13 @@ func dojump():
 		jumpclock= jumpmaxt
 
 func doturn():
-	dir*=-1
-	print('fuck')
+	dir=-sign(dir)
 
 func climb():
 	doclimb=true
 
-func fuckingdie():
+func fuckingdie(_score=1):
+	print(_score
+	)
+	global.score+=_score
 	queue_free()

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://conx5ci837kc6"]
+
+[ext_resource type="Texture2D" uid="uid://cajpt5je8nwnc" path="res://sprites/leaf.png" id="1_4l21t"]
+[ext_resource type="Texture2D" uid="uid://d2c0e2uejppbm" path="res://sprites/manto/mant4.png" id="2_3aupe"]
+[ext_resource type="Script" path="res://scenes/hit.gd" id="2_acmui"]
+
+[sub_resource type="Curve" id="Curve_00eum"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.570805, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_igt46"]
+curve = SubResource("Curve_00eum")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pxx8b"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 398, 2.08165e-12)
+initial_velocity_min = 10.83
+initial_velocity_max = 147.88
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.0
+scale_max = 3.1
+scale_curve = SubResource("CurveTexture_igt46")
+
+[node name="hit" type="GPUParticles2D"]
+emitting = false
+amount = 13
+process_material = SubResource("ParticleProcessMaterial_pxx8b")
+texture = ExtResource("1_4l21t")
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.73
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 1
+script = ExtResource("2_acmui")
+
+[node name="manto" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_3aupe")

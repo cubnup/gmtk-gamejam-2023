@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b11d0nsnnwomx"]
+
+[ext_resource type="Script" path="res://scripts/manto.gd" id="1_848ym"]
+[ext_resource type="SpriteFrames" uid="uid://b8u0tolge58gm" path="res://resources/manto.tres" id="2_brckm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rl8u"]
+height = 26.0
+
+[node name="manto" type="CharacterBody2D"]
+z_index = 89
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(4, 4)
+collision_layer = 258
+collision_mask = 20
+script = ExtResource("1_848ym")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.08165e-12, 2)
+sprite_frames = ExtResource("2_brckm")
+
+[node name="coll" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_0rl8u")
+
+[node name="rc" type="RayCast2D" parent="."]
+position = Vector2(0, 14)
+
+[node name="rc2" type="RayCast2D" parent="."]
+position = Vector2(0, 14)

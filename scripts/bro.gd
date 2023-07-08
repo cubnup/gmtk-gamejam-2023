@@ -30,44 +30,42 @@ var jumpg = 0.1
 var fallg = 69.2
 var animclock = 0
 var dir = -1
-var larvaepercharge = 8
-var larvae = larvaepercharge
+var larvaepercharge = 5
+var larvae = 10
 var larvaclock =0 
 
 var throwtype = 0
 
 var coyote = 30
 var charging = 0
+var chargeclock = 0
+var chargedist = 0
 
 
 func _ready():
 	global.bro=self
-	throwtype = 1
 
 
 func _physics_process(delta):
 	if charging>0:charging-=1
-	
-	if throwtype == 0:
-		larvaclock+=1
-		if larvaclock==100:
-			larvaclock=0
-			if larvae<larvaepercharge:larvae+=1
 	if Input.is_action_just_pressed("reload"):
+		global.score=0
 		ltrail.empty()
 		get_tree().reload_current_scene()
 	animclock = (animclock+1)%12
 	if not is_on_floor(): velocity.y+=gravity
 	var direction = Input.get_axis("l", "r")
 	
-
+	if !Input.is_action_pressed("shift") and abs(velocity.x)>0:
+		dir = sign(velocity.x) 
 	
 	if is_on_floor():
 		coyote = 30
 		jumpstate = 1
-		if abs(velocity.x)>60 or (abs(velocity.x)>0 and sign(velocity.x)==sign(Input.get_axis("l", "r"))): spr.frame = 3 if (animclock>5) else 4
+		if abs(velocity.x)>60 or (abs(velocity.x)>0 and sign(velocity.x)==sign(Input.get_axis("l", "r"))):
+			spr.frame = 3 if (animclock>5) else 4
 		else: spr.frame = 0
-		if sign(velocity.x)!=0 and sign(velocity.x)==-sign(Input.get_axis("l", "r")):
+		if abs(velocity.x)>60 and sign(velocity.x)==-sign(Input.get_axis("l", "r")):
 			spr.frame = 1
 	else:
 		if coyote>0:coyote-=1
@@ -75,40 +73,35 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed('d') and is_on_floor():
 		set_collision_mask_value(5,false)
+		set_collision_layer_value(5,false)
 	else:
 		set_collision_mask_value(5,true)
-
+		set_collision_layer_value(5,true)
 	if Input.is_action_pressed("d"):
 		if is_on_floor():
 			spr.frame = 2
-			if crouchclock<=30:crouchclock+=2
+			if crouchclock<=30:crouchclock+=3
 		else: 
 			velocity.x = lerp(velocity.x, direction * speed, 0.035)
 	else:
 		spr.modulate = Color(1, 1, 1, 1)
 			
-	if !Input.is_action_pressed("d") or !is_on_floor():spr.modulate = Color(1, 1, 1, 1)
+	if !Input.is_action_pressed("d") or !is_on_floor():
+		spr.modulate = Color(1, 1, 1, 1)
+		if charging==0:
+			spr.modulate = Color(0.7, 0.7, 0.7, 1)
 		
 	if crouchclock>0:
 		if crouchclock>15:jumpnow =-jumpvel*2
 		crouchclock-=1
 		if crouchclock>15:
-			spr.modulate = Color(1, 0, 0, 1) if animclock>5 else Color(1, 1, 1, 1)
-#		if Input.is_action_just_pressed("shift") and crouchclock>=25:
-#			throw(1.2)
-#			throw(1.0)
-#			throw(0.8)
-#			throw(0.6)
-#			throw(0.4)
-#			crouchclock=0
+			if animclock>5: spr.modulate = Color(1, 0, 0, 1) 
 	if Input.is_action_just_pressed("jump") and jumpstate==1:
 		jumpstate=2
 		jumpnow = -jumpvel
 		velocity.y = jumpnow
 		jumpclock=jumptime
 
-	if charging>0:
-		spr.modulate = Color(0.7, 0.7, 0.7, 1)
 	match jumpstate:
 		0:
 			gravity = fallg
@@ -154,46 +147,48 @@ func _physics_process(delta):
 
 
 
-	if direction and (!Input.is_action_pressed("d")):
+	if direction and !Input.is_action_pressed("d"):
 		velocity.x = lerp(velocity.x, direction * speed, 0.035)
 	else:
 		if Input.is_action_pressed("d"): velocity.x = lerp(velocity.x,0.0,0.01)
 		else: velocity.x = lerp(velocity.x,0.0,0.05)
 
 
-
-
+	spr.scale.x=-2*dir
 
 
 	move_and_slide()
 
 
 func throw(_mult=1):
-	if larvae>0 and charging==0:
+	if larvae>0:
 		match throwtype:
 			0:
 				var l = larva.instantiate()
-				l.dir=dir
+				l.dir=int(dir)
 				l.mult = _mult
 				larvae-=1
-				l.speedx-=velocity.x
+				l.speedx+=abs(velocity.x)
 				l.global_position=global_position+Vector2.UP*20
 				get_tree().get_root().add_child(l)
 			1:
 				var l = larvarang.instantiate()
-				l.dir=dir
+				l.dir=int(dir)
 				l.mult = _mult
 				larvae-=1
 				l.global_position=global_position+Vector2.UP*20
 				get_tree().get_root().add_child(l)
 		if larvae==0 and throwtype!=0:
-			powerup(0,5)
+			powerup(0,2)
 
 
-func recharge():
+func recharge(_dist=0):
 	charging = 10
-	if throwtype==0 and larvae<larvaepercharge:
-		if animclock==1: larvae+=1
+	if throwtype == 0:
+		larvaclock+=1
+		if larvaclock==39-round(_dist/900):
+			larvaclock=0
+			if larvae<larvaepercharge:larvae+=1
 
 func powerup(_which=0,_howmany=5):
 	throwtype=_which

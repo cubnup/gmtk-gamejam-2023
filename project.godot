@@ -21,8 +21,12 @@ global="*res://scripts/global.gd"
 
 [display]
 
+window/size/viewport_width=480
+window/size/viewport_height=448
 window/size/mode=2
 window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [input]
 

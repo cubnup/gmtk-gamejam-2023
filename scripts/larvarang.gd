@@ -9,7 +9,7 @@ var fallspd = 39.2
 var dir = 1
 var mult = 1
 var lifetime = 0.0
-
+var score = 0
 
 var animclock=0
 
@@ -33,6 +33,10 @@ func _physics_process(delta):
 	if move_and_slide():
 		for i in get_slide_collision_count():
 			var manto = get_slide_collision(i).get_collider()
-			manto.fuckingdie()
+			print(score)
+			if manto.has_method('fuckingdie'): 
+				manto.fuckingdie()
+				global.score+=score
+				score+=1
 	if global_position.y>5000:queue_free()
 	rotation+=180 if animclock>5 else 0
