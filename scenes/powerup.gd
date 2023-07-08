@@ -17,17 +17,18 @@ func _physics_process(delta):
 	clock+=0.05
 	particles.texture = spr.texture
 	global_position.y+=sin(clock)
-	scale.y-=0.001
-	scale.x-=0.001
+	spr.scale.y-=0.005
+	spr.scale.x-=0.005
 	if dying == true:
-		scale.x-=0.05
-		scale.y-=0.05
+		spr.scale.x-=0.05
+		spr.scale.y-=0.05
 		particles.emitting=true
-		if scale.x<=0 or clock == 30:
-			queue_free()
 	else:
 		particles.emitting=false
-
+	if spr.scale.x<=2 or clock == 10:
+		dying=true
+	if spr.scale.x<=0:
+		queue_free()
 func _on_body_entered(body):
 	if body.has_method('powerup'):
 		body.powerup(type,amount)

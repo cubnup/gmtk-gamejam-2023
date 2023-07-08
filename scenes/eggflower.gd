@@ -19,7 +19,7 @@ var animclock=0
 
 
 func _ready():
-	velocity += Vector2(dir*speedx,-speedy*mult)
+	velocity += Vector2(dir*speedx,-600)
 #	fallspd /= rng
 	
 
@@ -30,8 +30,7 @@ func _physics_process(delta):
 	lifetime+=0.05
 	
 	if lifetime>=9:queue_free()
-	if rc.is_colliding():
-		print('-1')
+	if rc.is_colliding() and lifetime>0.75:
 		dir*=-1
 	velocity.x = dir*abs(speedx)
 	velocity.y= lerp(velocity.y,abs(speedx*2.5),0.1)

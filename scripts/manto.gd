@@ -40,62 +40,64 @@ var doclimb = false
 var sprintclock = 0
 
 func _physics_process(delta): 
-	if global_position.x>global.flower.global_position.x+50: dir=-1
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	sprintclock+=rng.randi_range(0,5)
-	if sprintclock>240:
-		sprintclock=0
-		sprinting = !sprinting
-	
-	dir+=0.01*sign(global.flower.global_position.x-global_position.x)
-	dir = clampf(dir,-1,1)
-	
-	if dir!=0:spr.scale.x=-sign(dir)
-	animclock = (animclock+1)%12
-	rng = RandomNumberGenerator.new()
-	rng.randomize()
-	if targetclock==0: targeti=rng.randi_range(0,2)
-	targetclock+=1
-	
-	rc.target_position=Vector2(sign(velocity.x)*50,0)
-	
-	
-	
-	rng.randomize()
-	if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.9) or rng.randf_range(0,1)>0.9):
-		jump()
-	if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.99) or rng.randf_range(0,1)>0.99):
-		doturn()
-
-	if is_on_floor():
-		jumpstate=1
-		spr.frame = 0 if animclock>5 else 1
-#		jump()
-	if jumpclock>0:
-		jumpclock-=1
-	if jumpclock==0 and !is_on_floor():
-		jumpstate=0
-	match jumpstate:
-		0:
-			gravity = fallg
-			spr.frame = 3
-		1:
-			gravity = normalg
-		2:
-			gravity = jumpg
-			spr.frame = 2
-		
-	if not is_on_floor(): velocity.y+=gravity
-	
-	var speednow = sprspeed if sprinting else speed
-	velocity.x += accel*dir
-	velocity.x = lerp(velocity.x,clampf(velocity.x,-speednow,speednow),0.1)
-	
 	
 	if doclimb: 
-		velocity=Vector2.UP*60
+		velocity=velocity.lerp(Vector2.UP*60,0.1)
 		spr.frame=2 if animclock>5 else 3
+	else:
+		if global_position.x>global.flower.global_position.x+50: dir=-1
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		sprintclock+=rng.randi_range(0,5)
+		if sprintclock>240:
+			sprintclock=0
+			sprinting = !sprinting
+		
+		dir+=0.01*sign(global.flower.global_position.x-global_position.x)
+		dir = clampf(dir,-1,1)
+		
+		if dir!=0:spr.scale.x=-sign(dir)
+		animclock = (animclock+1)%12
+		rng = RandomNumberGenerator.new()
+		rng.randomize()
+		if targetclock==0: targeti=rng.randi_range(0,2)
+		targetclock+=1
+		
+		rc.target_position=Vector2(sign(velocity.x)*50,0)
+		
+		
+		
+		rng.randomize()
+		if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.9) or rng.randf_range(0,1)>0.9):
+			jump()
+		if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.99) or rng.randf_range(0,1)>0.99):
+			doturn()
+
+		if is_on_floor():
+			jumpstate=1
+			spr.frame = 0 if animclock>5 else 1
+	#		jump()
+		if jumpclock>0:
+			jumpclock-=1
+		if jumpclock==0 and !is_on_floor():
+			jumpstate=0
+		match jumpstate:
+			0:
+				gravity = fallg
+				spr.frame = 3
+			1:
+				gravity = normalg
+			2:
+				gravity = jumpg
+				spr.frame = 2
+			
+		if not is_on_floor(): velocity.y+=gravity
+		
+		var speednow = sprspeed if sprinting else speed
+		velocity.x += accel*dir
+		velocity.x = lerp(velocity.x,clampf(velocity.x,-speednow,speednow),0.1)
+		
+	
 
 	move_and_slide()
 
@@ -116,6 +118,9 @@ func doturn():
 	dir=-sign(dir)
 
 func climb():
+	if !doclimb: 
+		velocity.x=0
+		velocity.y=1000
 	doclimb=true
 
 func fuckingdie(_score=1):

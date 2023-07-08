@@ -1,8 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dk8fjral83ym1"]
+[gd_scene load_steps=10 format=3 uid="uid://dk8fjral83ym1"]
 
 [ext_resource type="Script" path="res://scripts/cam.gd" id="1_4posa"]
 [ext_resource type="Texture2D" uid="uid://cajpt5je8nwnc" path="res://sprites/leaf.png" id="2_787ug"]
 [ext_resource type="Texture2D" uid="uid://bq5sbqyyp44gi" path="res://sprites/sky-export.png" id="3_roimh"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qyddl"]
+blend_mode = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_3n2kw"]
+font_size = 100
 
 [sub_resource type="Curve" id="Curve_w1amf"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.194926, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -16,15 +22,16 @@ emission_shape = 3
 emission_box_extents = Vector3(400, 1, 1)
 particle_flag_disable_z = true
 gravity = Vector3(0, 98, 0)
-angular_velocity_min = -325.89
-angular_velocity_max = 719.66
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 radial_accel_min = -100.0
 radial_accel_max = 100.0
 scale_min = 5.0
-scale_max = 10.0
+scale_max = 20.0
 scale_curve = SubResource("CurveTexture_ilcn0")
+color = Color(1, 1, 1, 0.54902)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5mvdt"]
 emission_shape = 3
@@ -47,10 +54,14 @@ zoom = Vector2(0.5, 0.5)
 script = ExtResource("1_4posa")
 
 [node name="score" type="Label" parent="."]
-offset_left = -222.0
-offset_top = -33.0
-offset_right = -182.0
-offset_bottom = -10.0
+modulate = Color(1, 1, 1, 0.439216)
+material = SubResource("CanvasItemMaterial_qyddl")
+offset_left = -319.0
+offset_top = -348.0
+offset_right = -279.0
+offset_bottom = -325.0
+text = "asdasdasd"
+label_settings = SubResource("LabelSettings_3n2kw")
 
 [node name="leaves" type="GPUParticles2D" parent="."]
 z_index = 100
@@ -60,6 +71,7 @@ process_material = SubResource("ParticleProcessMaterial_ineyk")
 texture = ExtResource("2_787ug")
 lifetime = 10.0
 preprocess = 10.0
+speed_scale = 0.2
 
 [node name="leaves2" type="GPUParticles2D" parent="."]
 z_index = -100
@@ -69,6 +81,7 @@ process_material = SubResource("ParticleProcessMaterial_5mvdt")
 texture = ExtResource("2_787ug")
 lifetime = 10.0
 preprocess = 10.0
+speed_scale = 0.25
 
 [node name="sky" type="Sprite2D" parent="."]
 z_index = -999

@@ -10,9 +10,9 @@ extends CharacterBody2D
 @onready var global = get_node('/root/global')
 
 
-var speed = 170.0
+var speed = 270.0
 var speedmin = 150.0
-var speedmax = 250.0
+var speedmax = 350.0
 var hopvel = 150.0
 var hopmin = 350.0
 var hopmax = 550.0
@@ -75,7 +75,7 @@ func _physics_process(delta):
 		if coyote>0:coyote-=1
 		else:jumpstate=0
 	
-	if Input.is_action_just_pressed('d') and is_on_floor():
+	if Input.is_action_pressed('d') and is_on_floor():
 		position.y += 15
 #		set_collision_mask_value(5,)
 #		set_collision_layer_value(5,false)
@@ -221,8 +221,8 @@ func powerup(_which=0,_howmany=1):
 		if len(larvae)<larvamax:
 			larvae.push_front(_which)
 		else:
-			larvae.pop_front()
-			larvae.append(_which)
+			larvae.pop_back()
+			larvae.push_front(_which)
 		
 
 

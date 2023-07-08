@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dubbeo1vjtj5q" path="res://sprites/larva.png" id="2_lt6ip"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chhf5"]
-radius = 60.0
+radius = 25.0
 
 [sub_resource type="Curve" id="Curve_bjipr"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

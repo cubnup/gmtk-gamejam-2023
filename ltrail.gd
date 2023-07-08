@@ -32,6 +32,6 @@ func empty():
 
 func newlarva(_type=0):
 	var t = traillarva.instantiate()
-	larvarr.append(t)
+	larvarr.push_front(t)
 	t.global_position=tpos
 	get_tree().get_root().add_child(t)

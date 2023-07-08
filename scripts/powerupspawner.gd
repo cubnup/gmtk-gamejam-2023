@@ -13,14 +13,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	clock=(clock+1)%100
+	clock=(clock+1)%75
 	if clock==0:
 		var spawn=0
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
 		var dir = sign(global.bro.global_position.x-global.flower.global_position.x)
 		var rval = rng.randf_range(0,1)
-		var rposx = randf_range(350,2000)
+		var rposx = randf_range(250,1250)
 		var rposy = randf_range(50,-100)
 		var sum =0
 		for i in len(probs):
