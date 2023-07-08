@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://conx5ci837kc6"]
+[gd_scene load_steps=7 format=3 uid="uid://b6xw46twjvwme"]
 
 [ext_resource type="Texture2D" uid="uid://cajpt5je8nwnc" path="res://sprites/leaf.png" id="1_4l21t"]
 [ext_resource type="Texture2D" uid="uid://d2c0e2uejppbm" path="res://sprites/manto/mant4.png" id="2_3aupe"]
-[ext_resource type="Script" path="res://scenes/hit.gd" id="2_acmui"]
+[ext_resource type="Script" path="res://scripts/hit.gd" id="2_jn17q"]
 
 [sub_resource type="Curve" id="Curve_00eum"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.570805, 0), 0.0, 0.0, 0, 0]
@@ -35,7 +35,7 @@ explosiveness = 0.73
 trail_enabled = true
 trail_sections = 2
 trail_section_subdivisions = 1
-script = ExtResource("2_acmui")
+script = ExtResource("2_jn17q")
 
 [node name="manto" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

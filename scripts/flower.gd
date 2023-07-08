@@ -18,9 +18,9 @@ func _ready():
 func _physics_process(delta):
 	spr.frame = 5-health
 	var dist = abs(global.bro.global_position.x-global_position.x)
-
-	if dist>chargedist: 
-		global.bro.recharge(dist)
+#
+#	if dist>chargedist: 
+#		global.bro.recharge(dist)
 	
 #	if ((global.bro.global_position.x-global_position.x)>0 and abs((global.bro.global_position.x-global_position.x))<chargedist) or ((global.bro.global_position.x-global_position.x)<0 and abs((global.bro.global_position.x-global_position.x))<chargedist/2):
 #		larvaline.points[0]=larvaline.points[0].lerp(Vector2.ZERO,0.1)

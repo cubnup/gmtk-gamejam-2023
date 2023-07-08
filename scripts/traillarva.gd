@@ -26,17 +26,19 @@ var followdist = 30
 const fardist = 700
 var state = 0
 
+var which = 0 
+
 var doclimb = false
 
 func _ready():
 	target = global.bro
 	rng = RandomNumberGenerator.new()
 	targetclock = rng.randi_range(0,targetswitch)
-	global_position=global.flower.global_position+Vector2.UP*30
 	
 
 func _physics_process(delta): 
 	followdist=10*(index+1)
+	
 	
 #	if is_on_floor():
 #		jump()
@@ -62,7 +64,6 @@ func _physics_process(delta):
 			global_position=global_position.lerp(global.bro.global_position-(global.bro.global_position-global_position+rngv*5).normalized()*followdist,0.1)
 			look_at(global.bro.global_position)
 	
-	spr.frame = global.bro.throwtype
 
 
 func jump():

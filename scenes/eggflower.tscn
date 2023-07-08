@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxtsoso4bisr8"]
+
+[ext_resource type="Script" path="res://scenes/eggflower.gd" id="1_y2jpa"]
+[ext_resource type="Texture2D" uid="uid://30p13ygnw1t8" path="res://sprites/egg.png" id="2_v81e4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ivog1"]
+radius = 7.0
+
+[node name="eggflower" type="CharacterBody2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(2, 2)
+collision_layer = 72
+collision_mask = 74
+script = ExtResource("1_y2jpa")
+
+[node name="coll" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ivog1")
+
+[node name="sprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_v81e4")
+
+[node name="rc" type="RayCast2D" parent="."]
+collision_mask = 72
+
+[node name="ln" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0)

@@ -44,6 +44,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rl8u"]
+radius = 6.2
 height = 26.0
 
 [node name="bro" type="CharacterBody2D"]

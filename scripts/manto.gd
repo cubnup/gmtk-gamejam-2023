@@ -119,7 +119,5 @@ func climb():
 	doclimb=true
 
 func fuckingdie(_score=1):
-	print(_score
-	)
 	global.score+=_score
 	queue_free()

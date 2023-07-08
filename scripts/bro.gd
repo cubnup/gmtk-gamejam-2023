@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var ltrail = get_node('ltrail')
 @onready var larva = preload("res://scenes/larva.tscn")
 @onready var larvarang = preload("res://scenes/larvarang.tscn")
+@onready var eggflower = preload("res://scenes/eggflower.tscn")
+@onready var pound = preload("res://scenes/pound.tscn")
 @onready var global = get_node('/root/global')
 
 
@@ -31,7 +33,8 @@ var fallg = 69.2
 var animclock = 0
 var dir = -1
 var larvaepercharge = 5
-var larvae = 10
+var larvae = [0,0,0,0,0]
+var larvamax = 15
 var larvaclock =0 
 
 var throwtype = 0
@@ -47,6 +50,7 @@ func _ready():
 
 
 func _physics_process(delta):
+	
 	if charging>0:charging-=1
 	if Input.is_action_just_pressed("reload"):
 		global.score=0
@@ -71,12 +75,13 @@ func _physics_process(delta):
 		if coyote>0:coyote-=1
 		else:jumpstate=0
 	
-	if Input.is_action_pressed('d') and is_on_floor():
-		set_collision_mask_value(5,false)
-		set_collision_layer_value(5,false)
-	else:
-		set_collision_mask_value(5,true)
-		set_collision_layer_value(5,true)
+	if Input.is_action_just_pressed('d') and is_on_floor():
+		position.y += 15
+#		set_collision_mask_value(5,)
+#		set_collision_layer_value(5,false)
+#	else:
+#		set_collision_mask_value(5,true)
+#		set_collision_layer_value(5,true)
 	if Input.is_action_pressed("d"):
 		if is_on_floor():
 			spr.frame = 2
@@ -85,17 +90,22 @@ func _physics_process(delta):
 			velocity.x = lerp(velocity.x, direction * speed, 0.035)
 	else:
 		spr.modulate = Color(1, 1, 1, 1)
+		if charging==0:
+			spr.modulate = Color(0.7, 0.7, 0.7, 1)
 			
 	if !Input.is_action_pressed("d") or !is_on_floor():
 		spr.modulate = Color(1, 1, 1, 1)
-		if charging==0:
-			spr.modulate = Color(0.7, 0.7, 0.7, 1)
 		
 	if crouchclock>0:
 		if crouchclock>15:jumpnow =-jumpvel*2
 		crouchclock-=1
 		if crouchclock>15:
 			if animclock>5: spr.modulate = Color(1, 0, 0, 1) 
+			else:
+				spr.modulate = Color(1, 1, 1, 1)
+				if charging==0:
+					spr.modulate = Color(0.7, 0.7, 0.7, 1)
+			
 	if Input.is_action_just_pressed("jump") and jumpstate==1:
 		jumpstate=2
 		jumpnow = -jumpvel
@@ -123,8 +133,9 @@ func _physics_process(delta):
 	if jumpclock>0:jumpclock-=1
 		
 		
-		
-	if Input.is_action_pressed("shift"):
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	if Input.is_action_just_pressed("shift") or (Input.is_action_pressed("shift") and rng.randi_range(0,1)==1):
 		if crouchclock==0:
 #			var rng = RandomNumberGenerator.new()
 			if is_on_floor():
@@ -161,13 +172,13 @@ func _physics_process(delta):
 
 
 func throw(_mult=1):
-	if larvae>0:
-		match throwtype:
+	if len(larvae)>0:
+		match larvae[0]:
 			0:
 				var l = larva.instantiate()
 				l.dir=int(dir)
 				l.mult = _mult
-				larvae-=1
+				larvae.pop_front()
 				l.speedx+=abs(velocity.x)
 				l.global_position=global_position+Vector2.UP*20
 				get_tree().get_root().add_child(l)
@@ -175,10 +186,25 @@ func throw(_mult=1):
 				var l = larvarang.instantiate()
 				l.dir=int(dir)
 				l.mult = _mult
-				larvae-=1
+				larvae.pop_front()
 				l.global_position=global_position+Vector2.UP*20
 				get_tree().get_root().add_child(l)
-		if larvae==0 and throwtype!=0:
+			2:
+				var l = eggflower.instantiate()
+				l.dir=int(dir)
+				l.mult = _mult
+				larvae.pop_front()
+				l.global_position=global_position+Vector2.UP*20
+				get_tree().get_root().add_child(l)
+			3:
+				var l = pound.instantiate()
+				l.dir=int(dir)
+				l.mult = _mult
+				larvae.pop_front()
+				l.global_position=global_position+Vector2.UP*20
+				get_tree().get_root().add_child(l)
+
+		if len(larvae)==0 and throwtype!=0:
 			powerup(0,2)
 
 
@@ -190,9 +216,14 @@ func recharge(_dist=0):
 			larvaclock=0
 			if larvae<larvaepercharge:larvae+=1
 
-func powerup(_which=0,_howmany=5):
-	throwtype=_which
-	larvae=_howmany
+func powerup(_which=0,_howmany=1):
+	for i in range(_howmany):
+		if len(larvae)<larvamax:
+			larvae.push_front(_which)
+		else:
+			larvae.pop_front()
+			larvae.append(_which)
+		
 
 
 

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://lm44ruob43hs"]
+
+[ext_resource type="Script" path="res://scripts/larvarang.gd" id="1_hhoir"]
+[ext_resource type="Texture2D" uid="uid://bogwsfe8i7phc" path="res://sprites/larvarang.png" id="2_u7d3v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ivog1"]
+radius = 15.52
+
+[node name="larvarang" type="CharacterBody2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_hhoir")
+
+[node name="coll" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ivog1")
+
+[node name="sprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_u7d3v")

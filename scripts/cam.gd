@@ -10,7 +10,6 @@ extends Camera2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	print(get_viewport_rect())
 	scorebar.text = str(global.score)
 	position.x=lerp(position.x,global.bro.global_position.x+global.bro.velocity.x*0.5,0.05)
 	position.y=lerp(position.y,global.bro.global_position.y+90,0.01)

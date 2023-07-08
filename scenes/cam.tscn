@@ -55,7 +55,7 @@ offset_bottom = -10.0
 [node name="leaves" type="GPUParticles2D" parent="."]
 z_index = 100
 position = Vector2(2.08165e-12, -500)
-amount = 19
+amount = 9
 process_material = SubResource("ParticleProcessMaterial_ineyk")
 texture = ExtResource("2_787ug")
 lifetime = 10.0

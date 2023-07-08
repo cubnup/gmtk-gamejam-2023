@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdjllb1q0172p"]
+
+[ext_resource type="Script" path="res://scenes/powerup.gd" id="1_w7bjk"]
+[ext_resource type="Texture2D" uid="uid://b34k1j3x26s34" path="res://sprites/snal.png" id="2_a0npx"]
+[ext_resource type="Texture2D" uid="uid://dubbeo1vjtj5q" path="res://sprites/larva.png" id="2_lt6ip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_chhf5"]
+radius = 60.0
+
+[sub_resource type="Curve" id="Curve_bjipr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7nhvb"]
+curve = SubResource("Curve_bjipr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2mal"]
+particle_flag_disable_z = true
+spread = 114.88
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -420.26
+angular_velocity_max = 312.65
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_7nhvb")
+
+[node name="poundpickup" type="Area2D"]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("1_w7bjk")
+type = 3
+amount = 1
+
+[node name="coll" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_chhf5")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_a0npx")
+
+[node name="particles" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_s2mal")
+texture = ExtResource("2_lt6ip")
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
