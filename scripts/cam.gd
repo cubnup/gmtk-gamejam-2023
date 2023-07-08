@@ -8,4 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	position.x=lerp(position.x,global.bro.global_position.x,0.1)
+	position.x=lerp(position.x,global.bro.global_position.x+global.bro.velocity.x*0.5,0.1)

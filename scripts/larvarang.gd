@@ -4,10 +4,11 @@ extends CharacterBody2D
 @onready var coll = get_node('coll')
 
 var speedx = 200.0
-var speedy = 400.0
+var speedy = 0.0
 var fallspd = 39.2
 var dir = 1
 var mult = 1
+var lifetime = 0.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 
@@ -18,8 +19,12 @@ func _ready():
 	
 
 func _physics_process(delta):
-	velocity.x = dir*speedx
-	velocity.y+=fallspd
+	
+	lifetime+=0.05
+	
+	if lifetime>=9:queue_free()
+	velocity.x = 3*dir*speedx*cos(lifetime)
+	velocity.y=speedy
 	if move_and_slide():
 		for i in get_slide_collision_count():
 			var manto = get_slide_collision(i).get_collider()

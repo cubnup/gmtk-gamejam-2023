@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk8fjral83ym1"]
+
+[ext_resource type="Script" path="res://scripts/cam.gd" id="1_4posa"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qh8yu"]
+sky_top_color = Color(0.270588, 0.45098, 0.709804, 1)
+
+[sub_resource type="Sky" id="Sky_tcqre"]
+sky_material = SubResource("ProceduralSkyMaterial_qh8yu")
+
+[sub_resource type="Environment" id="Environment_m8a2g"]
+background_mode = 2
+sky = SubResource("Sky_tcqre")
+glow_enabled = true
+glow_intensity = 4.6
+
+[node name="cam" type="Camera2D"]
+offset = Vector2(2.08165e-12, 90)
+zoom = Vector2(2.5, 2.5)
+script = ExtResource("1_4posa")
+
+[node name="lbar" type="Label" parent="."]
+offset_left = -222.0
+offset_top = -33.0
+offset_right = -182.0
+offset_bottom = -10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m8a2g")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgwscbfpnperu"]
+
+[ext_resource type="Texture2D" uid="uid://dubbeo1vjtj5q" path="res://sprites/larva.png" id="1_lmdfg"]
+[ext_resource type="Script" path="res://scripts/traillarva.gd" id="1_vewaq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m8i3p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lmdfg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="traillarva" type="Node2D"]
+script = ExtResource("1_vewaq")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_m8i3p")
