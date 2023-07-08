@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk8fjral83ym1"]
+[gd_scene load_steps=11 format=3 uid="uid://dk8fjral83ym1"]
 
 [ext_resource type="Script" path="res://scripts/cam.gd" id="1_4posa"]
+[ext_resource type="FontFile" uid="uid://b8da3e0vnymdr" path="res://scenes/Super-Mario-World.ttf" id="2_124h0"]
 [ext_resource type="Texture2D" uid="uid://cajpt5je8nwnc" path="res://sprites/leaf.png" id="2_787ug"]
 [ext_resource type="Texture2D" uid="uid://bq5sbqyyp44gi" path="res://sprites/sky-export.png" id="3_roimh"]
 
@@ -8,6 +9,7 @@
 blend_mode = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_3n2kw"]
+font = ExtResource("2_124h0")
 font_size = 100
 
 [sub_resource type="Curve" id="Curve_w1amf"]

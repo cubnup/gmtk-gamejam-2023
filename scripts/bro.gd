@@ -33,8 +33,8 @@ var fallg = 69.2
 var animclock = 0
 var dir = -1
 var larvaepercharge = 5
-var larvae = [0,0,0,0,0]
-var larvamax = 15
+var larvae = []
+var larvamax = 9
 var larvaclock =0 
 
 var throwtype = 0
@@ -43,6 +43,8 @@ var coyote = 30
 var charging = 0
 var chargeclock = 0
 var chargedist = 0
+
+var canmove
 
 
 func _ready():
@@ -75,37 +77,35 @@ func _physics_process(delta):
 		if coyote>0:coyote-=1
 		else:jumpstate=0
 	
-	if Input.is_action_pressed('d') and is_on_floor():
-		position.y += 15
-#		set_collision_mask_value(5,)
-#		set_collision_layer_value(5,false)
-#	else:
-#		set_collision_mask_value(5,true)
-#		set_collision_layer_value(5,true)
-	if Input.is_action_pressed("d"):
+	if Input.is_action_just_pressed('d'):
 		if is_on_floor():
-			spr.frame = 2
-			if crouchclock<=30:crouchclock+=3
-		else: 
-			velocity.x = lerp(velocity.x, direction * speed, 0.035)
-	else:
-		spr.modulate = Color(1, 1, 1, 1)
-		if charging==0:
-			spr.modulate = Color(0.7, 0.7, 0.7, 1)
-			
-	if !Input.is_action_pressed("d") or !is_on_floor():
-		spr.modulate = Color(1, 1, 1, 1)
+			position.y += 15
 		
-	if crouchclock>0:
-		if crouchclock>15:jumpnow =-jumpvel*2
-		crouchclock-=1
-		if crouchclock>15:
-			if animclock>5: spr.modulate = Color(1, 0, 0, 1) 
-			else:
-				spr.modulate = Color(1, 1, 1, 1)
-				if charging==0:
-					spr.modulate = Color(0.7, 0.7, 0.7, 1)
-			
+		
+#	if Input.is_action_pressed("d"):
+#		if is_on_floor():
+#			spr.frame = 2
+#			if crouchclock<=30:crouchclock+=3
+#		else: 
+#			velocity.x = lerp(velocity.x, direction * speed, 0.035)
+#	else:
+#		spr.modulate = Color(1, 1, 1, 1)
+#		if charging==0:
+#			spr.modulate = Color(0.7, 0.7, 0.7, 1)
+#
+#	if !Input.is_action_pressed("d") or !is_on_floor():
+#		spr.modulate = Color(1, 1, 1, 1)
+#
+#	if crouchclock>0:
+#		if crouchclock>15:jumpnow =-jumpvel*2
+#		crouchclock-=1
+#		if crouchclock>15:
+#			if animclock>5: spr.modulate = Color(1, 0, 0, 1) 
+#			else:
+#				spr.modulate = Color(1, 1, 1, 1)
+#				if charging==0:
+#					spr.modulate = Color(0.7, 0.7, 0.7, 1)
+#
 	if Input.is_action_just_pressed("jump") and jumpstate==1:
 		jumpstate=2
 		jumpnow = -jumpvel
@@ -124,7 +124,7 @@ func _physics_process(delta):
 			velocity.y= jumpnow
 #			if Input.is_action_just_pressed("shift"):throw()
 			if Input.is_action_just_released('jump') or jumpclock == 0:
-				throw(1.7)
+				if !Input.is_action_pressed("d"):throw(1.7)
 				jumpstate = 0
 				
 			if jumpclock/jumptime <0.5: spr.frame = 5
@@ -156,13 +156,18 @@ func _physics_process(delta):
 	jumpvel = lerp(jumpmin,jumpmax,abs(velocity.x)/speed)
 	hopvel = lerp(hopmin,hopmax,0.05)
 
+	if Input.is_action_pressed('d'):
+		if is_on_floor(): canmove = false
+		else: canmove = true
+		spr.frame = 2
+	else: canmove=true
 
 
-	if direction and !Input.is_action_pressed("d"):
+	if direction and canmove:
 		velocity.x = lerp(velocity.x, direction * speed, 0.035)
 	else:
-		if Input.is_action_pressed("d"): velocity.x = lerp(velocity.x,0.0,0.01)
-		else: velocity.x = lerp(velocity.x,0.0,0.05)
+		
+		velocity.x = lerp(velocity.x,0.0,0.05)
 
 
 	spr.scale.x=-2*dir
