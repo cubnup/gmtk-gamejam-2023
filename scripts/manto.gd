@@ -70,7 +70,8 @@ func _physics_process(delta):
 		rng.randomize()
 		if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.9) or rng.randf_range(0,1)>0.9):
 			jump()
-		if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.99) or rng.randf_range(0,1)>0.99):
+		rng.randomize()
+		if is_on_floor() and ((rc.is_colliding() and rng.randf_range(0,1)>0.95) or rng.randf_range(0,1)>0.99):
 			doturn()
 
 		if is_on_floor():
@@ -125,4 +126,5 @@ func climb():
 
 func fuckingdie(_score=1):
 	global.score+=_score
+	global.enemanager.enemies.erase(self)
 	queue_free()

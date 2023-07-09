@@ -19,7 +19,7 @@ var animclock=0
 
 
 func _ready():
-	velocity += Vector2(dir*speedx,-600)
+	velocity += Vector2(dir*speedx,-900)
 #	fallspd /= rng
 	
 
@@ -28,7 +28,7 @@ func _physics_process(delta):
 	animclock = (animclock+1)%12
 	
 	lifetime+=0.05
-	
+	score+=2
 	if lifetime>=9:queue_free()
 	if rc.is_colliding() and lifetime>0.75:
 		dir*=-1
@@ -41,7 +41,6 @@ func _physics_process(delta):
 			var manto = get_slide_collision(i).get_collider()
 			if manto.has_method('fuckingdie'): 
 				manto.fuckingdie()
-				global.score+=1
-				queue_free()
+				global.score+=200
 	if global_position.y>5000:queue_free()
 	spr.rotation+=180 if animclock>5 else 0

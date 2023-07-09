@@ -22,7 +22,13 @@ func _ready():
 	
 
 func _physics_process(delta):
-	velocity.y+=fallspd
+	
+	lifetime+=0.1
+	
+	if lifetime<10:
+		velocity.y = -100
+	else:
+		velocity.y=600
 	if is_on_floor():
 		queue_free()
 		

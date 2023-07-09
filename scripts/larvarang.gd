@@ -26,7 +26,7 @@ func _physics_process(delta):
 	animclock = (animclock+1)%12
 	
 	lifetime+=0.05
-	
+	score+=2
 	if lifetime>=9:queue_free()
 	velocity.x = 3*dir*speedx*cos(lifetime)
 	velocity.y=sign(global.bro.global_position.y-global_position.y)*50
@@ -36,6 +36,6 @@ func _physics_process(delta):
 			if manto.has_method('fuckingdie'): 
 				manto.fuckingdie()
 				global.score+=score
-				score+=1
+				score+=200
 	if global_position.y>5000:queue_free()
 	rotation+=180 if animclock>5 else 0

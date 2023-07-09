@@ -43,4 +43,5 @@ func _on_area_body_entered(body):
 		if body.doclimb:
 			health-=1
 			particles.emitting=true
+			global.enemanager.enemies.erase(body)
 			body.queue_free()

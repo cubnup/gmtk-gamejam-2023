@@ -24,6 +24,7 @@ func _ready():
 func _physics_process(delta):
 	velocity.x = dir*abs(speedx)
 	velocity.y+=fallspd
+	score+=1
 	if move_and_slide():
 		for i in get_slide_collision_count():
 			var manto = get_slide_collision(i).get_collider()
@@ -34,8 +35,8 @@ func _physics_process(delta):
 			velocity.y=-speedy
 #			set_collision_mask_value(2,false)
 			if manto.has_method('fuckingdie'): 
+				score+=100
 				manto.fuckingdie(score)
-				score+=1
 			get_tree().get_root().add_child(h)
 	if global_position.y>5000:queue_free()
 	rotation+=0.1

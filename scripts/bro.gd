@@ -17,7 +17,7 @@ var hopvel = 150.0
 var hopmin = 350.0
 var hopmax = 550.0
 var jumpvel = 150.0
-var jumpmin = 400.0
+var jumpmin = 550.0
 var jumpmax = 650.0
 var jumpstate = 1
 var jumpnow = 0.0
@@ -34,7 +34,7 @@ var animclock = 0
 var dir = -1
 var larvaepercharge = 5
 var larvae = []
-var larvamax = 9
+var larvamax = 11
 var larvaclock =0 
 
 var throwtype = 0
@@ -79,7 +79,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed('d'):
 		if is_on_floor():
-			position.y += 15
+			position.y += 10
 		
 		
 #	if Input.is_action_pressed("d"):
